@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    /* Layout do Projeto */
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* Configuração de Módulos (Fundamental para Node.js) */
+    "module": "commonjs",
+    "moduleResolution": "node" /* <--- A mágica que permite imports sem .ts */,
+    "target": "es2020" /* Node suporta ES2020 tranquilo */,
+
+    /* Interoperabilidade */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    /* Tipagem Estrita (Bom manter) */
+    "strict": true,
+
+    /* REMOVIDOS/AJUSTADOS para facilitar sua vida:
+       - verbatimeModuleSyntax (removido pra não obrigar 'import type')
+       - types: [] (removido pra ele achar o Node.js)
+       - noUncheckedIndexedAccess (removido pq pra CLI simples pode ser chato validar cada array[0])
+    */
+
+    /* Se quiser usar decorators (tipo @Entity do TypeORM no futuro), descomente: */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
