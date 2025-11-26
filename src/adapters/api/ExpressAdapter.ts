@@ -1,12 +1,12 @@
 import express, { Request, Response, Express } from "express";
 import { Server } from "http";
-import { AgendadorService } from "../../core/services/AgendadorService";
+import { SchedulerService } from "../../services/SchedulerService";
 
-export class ExpressServer {
+export class ExpressAdapter {
   private app: Express;
   private server?: Server;
 
-  constructor(private service: AgendadorService) {
+  constructor(private service: SchedulerService) {
     this.app = express();
     this.setupMiddlewares();
     this.setupRoutes();

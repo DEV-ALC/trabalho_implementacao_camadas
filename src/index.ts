@@ -1,31 +1,21 @@
-import { SQLiteCompromissoRepo } from "./infra/database/SQLiteCompromissoRepo";
-import { AgendadorService } from "./core/services/AgendadorService";
-import { ExpressServer } from "./adapters/api/ExpressServer";
-import { InteractiveCLI } from "./adapters/cli/InteractiveCLI";
+import { AppointmentRepo } from "./repositories/AppointmentRepo";
+import { SchedulerService } from "./services/SchedulerService";
+import { ExpressAdapter } from "./adapters/api/ExpressAdapter";
+import { CLIAdapter } from "./adapters/cli/CLIAdapter";
 
 const start = async () => {
-  const repo = new SQLiteCompromissoRepo();
-  const service = new AgendadorService(repo);
+  const repo = new AppointmentRepo();
+  const service = new SchedulerService(repo);
 
   const args = process.argv.slice(2);
 
-  // MODO API
   if (args.includes("--api")) {
-    const server = new ExpressServer(service);
+    const server = new ExpressAdapter(service);
     server.start(3000);
-    return;
+  } else {
+    const cli = new CLIAdapter(service);
+    await cli.execute(args);
   }
-
-  //Modo Comando direto
-  if (args[0] === "listar_compromissos") {
-    const list = await service.listarCompomissos();
-    console.table(list);
-    return;
-  }
-
-  //Modo comando
-  const cli = new InteractiveCLI(service);
-  await cli.start();
 };
 
 start();

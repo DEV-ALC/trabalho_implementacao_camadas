@@ -1,9 +1,8 @@
 import sqlite3 from "sqlite3";
 import { Database, open } from "sqlite";
-import { CompromissosRepo } from "../../core/repositories/CompromissosRepo";
-import { Compromissos } from "../../core/entities/Compromissos";
+import { Compromissos } from "../entities/Compromissos";
 
-export class SQLiteCompromissoRepo implements CompromissosRepo {
+export class AppointmentRepo {
   private dbPromise: Promise<Database>;
 
   constructor() {

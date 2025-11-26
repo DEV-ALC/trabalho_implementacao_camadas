@@ -1,8 +1,8 @@
 import { Compromissos } from "../entities/Compromissos";
-import { CompromissosRepo } from "../repositories/CompromissosRepo";
+import { AppointmentRepo } from "../repositories/AppointmentRepo";
 
-export class AgendadorService {
-  constructor(private repo: CompromissosRepo) {}
+export class SchedulerService {
+  constructor(private repo: AppointmentRepo) {}
 
   async listarCompomissos() {
     return this.repo.listar();
